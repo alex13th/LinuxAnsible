@@ -1,0 +1,16 @@
+# {{ ansible_managed }}
+TYPE=Ethernet
+BOOTPROTO=static
+ONBOOT=yes
+{% if dhcp_interface_name is defined %}
+NAME={{ dhcp_interface_name }};
+{% endif %}
+{% if dhcp_interface_device is defined %}
+DEVICE={{ dhcp_interface_device }};
+{% endif %}
+{% if dhcp_interface_ipaddr is defined %}
+IPADDR={{ dhcp_interface_ipaddr }};
+{% endif %}
+{% if dhcp_interface_netmask is defined %}
+NETMASK={{ dhcp_interface_netmask }};
+{% endif %}

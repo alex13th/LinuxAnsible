@@ -1,0 +1,22 @@
+---
+# tasks file for yum-rep-srv
+
+- name: Install packages YUM Repository Server
+  package:
+    pkg: "{{ item }}"
+    state: installed
+  with_items:
+    - createrepo
+    - yum-utils
+  tags: yum-rep-srv
+
+- name: Set repository directory
+  file:
+    path: "/var/www/html/repos/{{ item }}"
+    state: directory
+  with_items:
+    - base
+    - centosplus
+    - extras
+    - updates
+  tags: yum-rep-srv

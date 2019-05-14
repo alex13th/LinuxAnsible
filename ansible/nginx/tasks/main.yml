@@ -1,0 +1,17 @@
+---
+# tasks file for nginx
+- name: Install packages www
+  package:
+    pkg: "{{ item }}"
+    state: installed
+  with_items:
+    - epel-release
+    - nginx
+  tags: www
+
+- name: Start nginx
+  service:
+    name: nginx
+    state: started
+    enabled: true
+  tags: www

@@ -1,0 +1,4 @@
+*.retry
+ansible/inventory
+.gitignore
+ansible/test.yml

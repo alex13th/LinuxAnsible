@@ -1,0 +1,35 @@
+all:
+  hosts:
+    cos7-netsrv01:
+      ansible_host: localhost
+      ansible_user: root
+
+      dhcp_interface_name: ens224
+      dhcp_interface_device: ens224
+      dhcp_interface_ipaddr: 10.10.10.1
+      dhcp_interface_networkmask: 255.255.255.0
+      
+      dhcp_global_default_lease_time: 28800 # 8hrs
+      dhcp_global_max_lease_time: 43200 # 12 hrs
+      dhcp_global_subnet_mask: 255.255.255.0
+      dhcp_global_broadcast_address: 10.10.10.255
+      #dhcp_global_routers: 10.0.2.2
+      dhcp_global_domain_name: loacldomain
+      dhcp_global_domain_name_servers:
+        - 8.8.8.8
+        - 8.8.4.4
+      dhcp_global_next_server: 10.10.10.1
+
+      dhcp_subnets:
+        - ip: 10.10.10.0
+          netmask: 255.255.255.0
+          domain_name_servers:
+            - 10.10.10.1
+          range_begin: 10.10.10.50
+          range_end: 10.10.10.100
+          routers: 10.10.10.1
+          pools:
+            - default_lease_time: 1800
+              max_lease_time: 3600
+              range_begin: 10.10.10.101
+              range_end: 10.10.10.127
