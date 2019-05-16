@@ -12,7 +12,7 @@
 
 - name: Set repository directory
   file:
-    path: "/var/www/html/repos/{{ item }}"
+    path: "/usr/share/nginx/html/repos/{{ item }}"
     state: directory
   with_items:
     - base

@@ -1,6 +1,6 @@
 galaxy_info:
   author: Alexei Sukharev
-  description: Ansible YUM Repository Server Role
+  description: Ansible Common configuration
 
   license: BSD
 
@@ -13,7 +13,5 @@ galaxy_info:
 
   galaxy_tags: 
     - system
-    - yum_repository
 
-dependencies:
-    - nginx
+dependencies: []

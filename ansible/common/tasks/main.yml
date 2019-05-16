@@ -1,0 +1,53 @@
+---
+# tasks file for common
+
+- include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+    - "{{ default }}.yml"
+  tags: common
+
+
+- name: Move repository files to archieve
+  block:
+    - file:
+        path: "{{ repository_dir }}/ansible_backup"
+        state: directory
+
+    - find:
+        paths: "{{ repository_dir }}"
+        patterns: "*.repo"
+      register: files_to_move
+
+    - copy:
+        src: "{{ item.path }}"
+        dest: "{{ repository_dir }}/ansible_backup/"
+        remote_src: yes
+      with_items: "{{ files_to_move.files }}"
+      loop_control: 
+        label: "Backup repo-file: {{ item.path }}"
+
+    - file:
+        path: "{{ item.path }}"
+        state: absent
+      with_items: "{{ files_to_move.files }}"
+      loop_control: 
+        label: "Remove repo-file: {{ item.path }}"
+
+  when:
+    - yum_use_local_repositories
+    - yum_use_only_local_repositories
+  tags: 
+    - common
+    - repository
+
+- name: Installing Local YUM-Repository`
+  template:
+    src: yum_local-repos.repo.j2
+    dest: "{{ yum_repository_dir }}/local-repos.repo"
+  when: yum_use_local_repositories
+  tags: 
+    - common
+    - repository
+
