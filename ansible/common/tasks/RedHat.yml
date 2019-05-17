@@ -1,0 +1,15 @@
+- name: Installing local YUM-repository`
+  yum_repository:
+    name: "{{ item.id }}"
+    description: "{{ item.name }}"
+    file: local-repos
+    baseurl: "{{ item.baseurl }}"
+    gpgcheck: "{{ item.gpgcheck | default('0') }}"
+    enabled: "{{ item.enabled | default('1') }}"
+  with_items: "{{ yum_local_repositories }}"
+  when: use_local_repositories
+  loop_control: 
+    label: "Add repository: {{ item.name }}"
+  tags: 
+    - common
+    - repository

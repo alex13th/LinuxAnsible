@@ -6,10 +6,10 @@
     - "{{ ansible_distribution }}.yml"
     - "{{ ansible_os_family }}.yml"
     - "{{ default }}.yml"
-  tags: common
+  tags: 
+    - common
 
-
-- name: Move repository files to archieve
+- name: Backup repository files
   block:
     - file:
         path: "{{ repository_dir }}/ansible_backup"
@@ -34,20 +34,42 @@
       with_items: "{{ files_to_move.files }}"
       loop_control: 
         label: "Remove repo-file: {{ item.path }}"
-
   when:
-    - yum_use_local_repositories
-    - yum_use_only_local_repositories
+    - use_local_repositories
+    - use_only_local_repositories
   tags: 
     - common
     - repository
 
-- name: Installing Local YUM-Repository`
-  template:
-    src: yum_local-repos.repo.j2
-    dest: "{{ yum_repository_dir }}/local-repos.repo"
-  when: yum_use_local_repositories
+- name: Import RedHat Tasks
+  import_tasks: RedHat.yml
+  when: ansible_facts['os_family']|lower == 'redhat'
+  tags:
+    - common
+
+
+- include_tasks: firewall_zone.yml
+  loop: "{{ zones }}"
+  loop_control:
+    loop_var: zone
+  tags:
+    - common
+    - firewalld
+
+- name: Reload firewalld
+  service:
+    name: firewalld
+    state: reloaded
+  tags:
+    - common
+    - firewalld
+  
+
+- name: Install vim editor
+  package:
+    pkg: "{{ item }}"
+    state: installed
+  with_items:
+    - vim
   tags: 
     - common
-    - repository
-

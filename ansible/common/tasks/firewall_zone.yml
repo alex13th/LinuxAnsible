@@ -1,0 +1,24 @@
+- debug:
+    msg: "Define interfaces for zone={{ zone.name }}"
+
+- firewalld:
+    zone: "{{ zone.name }}"
+    interface: "{{ item }}"
+    state: enabled
+    permanent: yes
+    immediate: yes
+  loop: "{{ zone.interfaces }}"
+  tags:
+    - common
+    - firewalld
+
+- firewalld:
+    zone: "{{ zone.name }}"
+    service: "{{ item }}"
+    state: enabled
+    permanent: yes
+    immediate: yes
+  loop: "{{ zone.services }}"
+  tags:
+    - common
+    - firewalld
