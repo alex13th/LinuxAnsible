@@ -1,0 +1,4 @@
+# roles/dhcp/vars/RedHat.yml
+---
+
+base_repository_dir: /etc/yum.repos.d

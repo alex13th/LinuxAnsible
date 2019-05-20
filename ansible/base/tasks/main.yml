@@ -7,22 +7,22 @@
     - "{{ ansible_os_family }}.yml"
     - "{{ default }}.yml"
   tags: 
-    - common
+    - base
 
 - name: Backup repository files
   block:
     - file:
-        path: "{{ repository_dir }}/ansible_backup"
+        path: "{{ base_repository_dir }}/ansible_backup"
         state: directory
 
     - find:
-        paths: "{{ repository_dir }}"
+        paths: "{{ base_repository_dir }}/"
         patterns: "*.repo"
       register: files_to_move
 
     - copy:
         src: "{{ item.path }}"
-        dest: "{{ repository_dir }}/ansible_backup/"
+        dest: "{{ base_repository_dir }}/ansible_backup/"
         remote_src: yes
       with_items: "{{ files_to_move.files }}"
       loop_control: 
@@ -35,41 +35,31 @@
       loop_control: 
         label: "Remove repo-file: {{ item.path }}"
   when:
-    - use_local_repositories
-    - use_only_local_repositories
+    - base_use_local_repositories
+    - base_use_only_local_repositories
   tags: 
-    - common
+    - base
     - repository
 
 - name: Import RedHat Tasks
   import_tasks: RedHat.yml
   when: ansible_facts['os_family']|lower == 'redhat'
   tags:
-    - common
-
+    - base
 
 - include_tasks: firewall_zone.yml
-  loop: "{{ zones }}"
+  loop: "{{ base_firewall_zones }}"
   loop_control:
     loop_var: zone
+  notify: Reload firewalld
   tags:
-    - common
+    - base
     - firewalld
 
-- name: Reload firewalld
-  service:
-    name: firewalld
-    state: reloaded
-  tags:
-    - common
-    - firewalld
-  
-
-- name: Install vim editor
+- name: Install base packages
   package:
     pkg: "{{ item }}"
     state: installed
-  with_items:
-    - vim
+  with_items: "{{ base_packages }}"
   tags: 
-    - common
+    - base

@@ -1,4 +1,0 @@
-# roles/dhcp/vars/RedHat.yml
----
-
-repository_dir: /etc/yum.repos.d

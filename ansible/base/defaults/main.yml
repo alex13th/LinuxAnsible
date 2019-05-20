@@ -1,0 +1,9 @@
+---
+# defaults file for common
+
+base_use_local_repositories: False
+base_use_only_local_repositories: False
+base_yum_local_repositories: []
+base_firewall_zones: []
+base_packages: 
+  - vim

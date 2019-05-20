@@ -1,6 +1,6 @@
 galaxy_info:
   author: Alexei Sukharev
-  description: Ansible Common configuration
+  description: Ansible base configuration
 
   license: BSD
 

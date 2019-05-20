@@ -9,7 +9,7 @@
     immediate: yes
   loop: "{{ zone.interfaces }}"
   tags:
-    - common
+    - base
     - firewalld
 
 - firewalld:
@@ -20,5 +20,5 @@
     immediate: yes
   loop: "{{ zone.services }}"
   tags:
-    - common
+    - base
     - firewalld

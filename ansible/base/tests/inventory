@@ -1,0 +1,30 @@
+all:
+  vars:
+    base_use_local_repositories: True
+    base_use_only_local_repositories: True
+    base_yum_local_repositories:
+      - id: Local-Base
+        name: CentOS Base
+        baseurl: http://localhost/repos/base/
+      - id: Local-CentOSPlus
+        name: CentOS CentOSPlus
+        baseurl: http://localhost/repos/centosplus/
+      - id: Local-Extras
+        name: CentOS Extras
+        baseurl: http://localhost/repos/extras/
+      - id: Local-Updates
+        name: CentOS Updates
+        baseurl: http://localhost/repos/updates/
+      - id: Local-EPEL
+        name: CentOS Extra Packages for Enterprise Linux
+        baseurl: http://localhost/repos/epel/
+
+  hosts:
+    localhost:
+      base_firewall_zones:
+        - name: dmz
+          interfaces:
+            - eth0
+          services:
+            - http
+            - https

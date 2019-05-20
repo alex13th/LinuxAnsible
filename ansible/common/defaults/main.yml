@@ -1,6 +1,0 @@
----
-# defaults file for common
-
-use_local_repositories: False
-use_only_local_repositories: False
-yum_local_repositories: []
