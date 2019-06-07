@@ -8,6 +8,7 @@
     permanent: yes
     immediate: yes
   loop: "{{ zone.interfaces }}"
+  notify: Reload firewalld
   tags:
     - base
     - firewalld
@@ -19,6 +20,7 @@
     permanent: yes
     immediate: yes
   loop: "{{ zone.services }}"
+  notify: Reload firewalld
   tags:
     - base
     - firewalld

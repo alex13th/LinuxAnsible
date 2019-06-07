@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<direct>
+{%
+for table in router_direct_tables%}{%
+    for chain in table.chains %}{%
+        for rule in chain.rules%}
+    <rule chain="{{ chain.name }}" table="{{ table.name }}"{%
+          if rule.priority is defined%} priority="{{ rule.priority }}"{%
+          else%} priority="0"{%
+          endif%}{%
+          if rule.family is defined %} ipv="{{ rule.family }}"{%
+          endif %}> -p {{ rule.protocol }} -m {{ rule.protocol }} --dport {{ rule.dport }} -i {{ rule.input_interface }} -o {{ rule.output_interface }} -m conntrack --ctstate {{ rule.connection_states }} -j {{ rule.target }} </rule>
+        {% endfor %}
+    {% endfor %}
+{% endfor %}
+</direct>

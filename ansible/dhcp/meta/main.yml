@@ -16,5 +16,4 @@ galaxy_info:
     - networking
     - dhcp
 
-dependencies: 
-  - common
+dependencies: []

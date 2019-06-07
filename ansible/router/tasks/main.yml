@@ -1,0 +1,13 @@
+---
+# tasks file for router
+- sysctl:
+    name: net.ipv4.ip_forward
+    value: 1
+    sysctl_set: yes
+
+- name: Install direct zone config file
+  template:
+    src: templates/direct.xml.j2
+    dest: "{{ direct_zone_config }}"
+  notify: reload firewalld
+  tags: router

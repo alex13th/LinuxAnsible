@@ -19,4 +19,5 @@
     - centosplus
     - extras
     - updates
+    - epel
   tags: yum-rep-srv

@@ -1,0 +1,4 @@
+---
+# defaults file for router
+
+direct_zone_config: /etc/firewalld/direct.xml

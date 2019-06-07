@@ -9,6 +9,10 @@
   tags: 
     - base
 
+- name: Set hostname
+  hostname:
+    name: "{{ base_hostname }}"
+    
 - name: Backup repository files
   block:
     - file:

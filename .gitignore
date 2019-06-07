@@ -2,3 +2,13 @@
 ansible/inventory
 .gitignore
 ansible/test.yml
+ansible/test1.yml
+ansible/base/files/CentOS-Sources.repo
+ansible/base/files/CentOS-Base.repo
+ansible/base/files/CentOS-CR.repo
+ansible/base/files/CentOS-Debuginfo.repo
+ansible/base/files/CentOS-Media.repo
+ansible/base/files/CentOS-Vault.repo
+ansible/base/files/CentOS-fasttrack.repo
+ansible/base/files/epel-testing.repo
+ansible/base/files/epel.repo
