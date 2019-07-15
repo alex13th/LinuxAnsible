@@ -15,14 +15,6 @@
   with_items: "{{ dhcp_packages }}"
   tags: dhcp
 
-
-- name: Install dhcp interface config file
-  template:
-    src: etc_dhcp_ifcfg.j2
-    dest: "{{ dhcp_ifcfg_file }}-{{ dhcp_interface_name }}"
-  notify: restart network
-  tags: dhcp
-
 - name: Set config directory perms
   file:
     path: "{{ dhcp_config | dirname }}"
