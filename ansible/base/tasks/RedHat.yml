@@ -1,3 +1,14 @@
+- name: Configure network interfaces
+  template:
+    src: ifcfg.j2
+    dest: "{{ base_netscripts_dir }}/ifcfg-{{ item.name }}"
+  with_items:
+    - "{{ base_interfaces }}"
+  notify: Restart network
+  tags: 
+    - base
+    - network
+
 - name: Installing local YUM-repository`
   yum_repository:
     name: "{{ item.id }}"

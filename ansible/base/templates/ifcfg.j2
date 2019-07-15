@@ -1,0 +1,25 @@
+TYPE={{ item.type|default('Ethernet') }};
+{%if item.bootproto is defined%}
+BOOTPROTO={{ item.bootproto|default('dhcp') }};
+{%elif item.ipaddr is defined%}
+BOOTPROTO=static;
+{%else%}
+BOOTPROTO=dhcp;
+{%endif%}
+ONBOOT={{ item.onboot|default('yes') }};
+NAME={{ item.name }};
+DEVICE={{ item.device|default(item.name) }};
+{%if item.ipaddr is defined %}
+IPADDR={{ item.ipaddr }};
+{%endif%}
+{%if item.netmask is defined %}
+NETMASK={{ item.netmask|default('255.255.255.0') }};
+{%endif%}
+{%if item.gateway is defined %}
+GATEWAY={{ item.gateway }}
+{%endif%}
+{%if item.dns_list is defined%}
+{%  for dns in item.dns_list%}
+DNS{{ loop.index }}={{ dns }}
+{%  endfor%}
+{%endif%}

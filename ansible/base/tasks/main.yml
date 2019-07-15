@@ -12,7 +12,10 @@
 - name: Set hostname
   hostname:
     name: "{{ base_hostname }}"
-    
+  tags:
+    - base
+    - network
+
 - name: Backup repository files
   block:
     - file:
@@ -59,6 +62,7 @@
   tags:
     - base
     - firewalld
+    - network
 
 - name: Install base packages
   package:

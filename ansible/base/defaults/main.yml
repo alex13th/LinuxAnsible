@@ -2,6 +2,7 @@
 # defaults file for common
 
 base_hostname: localhost.localdomain
+base_interfaces: []
 base_use_local_repositories: False
 base_use_only_local_repositories: False
 base_yum_local_repositories: []

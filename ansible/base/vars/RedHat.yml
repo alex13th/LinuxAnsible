@@ -2,3 +2,4 @@
 ---
 
 base_repository_dir: /etc/yum.repos.d
+base_netscripts_dir: /etc/sysconfig/network-scripts
