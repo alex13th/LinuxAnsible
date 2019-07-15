@@ -1,2 +1,37 @@
-localhost
+all:
+  hosts:
+    localhost:
+        router_direct_tables:
+        - name: filter
+          chains:
+            - name: FORWARD
+              rules:
+                - name: Allow forward SSH connections from eth0 to eth1
+                  priority: 0
+                  family: ipv4
+                  protocol: tcp
+                  dport: 22
+                  input_interface: eth0
+                  output_interface: eth1
+                  connection_states: NEW
+                  target: ACCEPT
 
+                - name: Allow forward SSH connections from eth1 to eth0
+                  priority: 1
+                  family: ipv4
+                  protocol: tcp
+                  dport: 22
+                  input_interface: eth1
+                  output_interface: eth0
+                  connection_states: NEW
+                  target: ACCEPT
+
+                - name: Allow forward HTTP connections from eth0 to eth1
+                  priority: 2
+                  family: ipv4
+                  protocol: tcp
+                  dport: 80
+                  input_interface: eth0
+                  output_interface: eth1
+                  connection_states: NEW
+                  target: ACCEPT
