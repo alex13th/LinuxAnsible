@@ -3,6 +3,6 @@ node {
         checkout scm
     }
     stage("Ansible-lint") {
-        sh "ansible-lint -p ./ansible/base"
+        sh "ansible-lint -p -v ./ansible/base"
     }
 }
