@@ -2,6 +2,9 @@ node {
     stage("Getting repository") {
         checkout scm
     }
+    stage("YAML-lint") {
+        sh "yamllint ./ansible/base"
+    }
     stage("Ansible-lint") {
         sh "ansible-lint -p -v ./ansible/base"
     }
