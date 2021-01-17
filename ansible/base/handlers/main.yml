@@ -1,5 +1,5 @@
 ---
-# handlers file for common
+# handlers file for base
 
 - name: Reload firewalld
   service:

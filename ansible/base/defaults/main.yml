@@ -1,11 +1,11 @@
 ---
-# defaults file for common
+# defaults file for base
 
 base_hostname: localhost.localdomain
 base_interfaces: []
-base_use_local_repositories: False
-base_use_only_local_repositories: False
+base_use_local_repositories: false
+base_use_only_local_repositories: false
 base_yum_local_repositories: []
 base_firewall_zones: []
-base_packages: 
+base_packages:
   - vim

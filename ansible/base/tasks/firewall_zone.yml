@@ -1,3 +1,5 @@
+---
+
 - name: "Defining interfaces for zone {{ zone.name }}"
   firewalld:
     zone: "{{ zone.name }}"

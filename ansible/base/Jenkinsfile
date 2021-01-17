@@ -3,7 +3,7 @@ node {
         checkout scm
     }
     stage("YAML-lint") {
-        sh "yamllint -v ./ansible/base"
+        sh "yamllint ./ansible/base"
     }
     stage("Ansible-lint") {
         sh "ansible-lint -p -v ./ansible/base"
