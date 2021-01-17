@@ -1,7 +1,5 @@
-- debug:
-    msg: "Define interfaces for zone={{ zone.name }}"
-
-- firewalld:
+- name: "Defining interfaces for zone {{ zone.name }}"
+  firewalld:
     zone: "{{ zone.name }}"
     interface: "{{ item }}"
     state: enabled
@@ -13,7 +11,8 @@
     - base
     - firewalld
 
-- firewalld:
+- name: "Enabling services for zone {{ zone.name }}"
+  firewalld:
     zone: "{{ zone.name }}"
     service: "{{ item }}"
     state: enabled

@@ -5,7 +5,7 @@
   with_items:
     - "{{ base_interfaces }}"
   notify: Restart network
-  tags: 
+  tags:
     - base
     - network
 
@@ -19,8 +19,8 @@
     enabled: "{{ item.enabled | default('1') }}"
   with_items: "{{ base_yum_local_repositories }}"
   when: base_use_local_repositories
-  loop_control: 
+  loop_control:
     label: "Add repository: {{ item.name }}"
-  tags: 
+  tags:
     - base
     - repository
