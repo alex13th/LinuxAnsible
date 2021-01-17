@@ -75,5 +75,5 @@
     pkg: "{{ item }}"
     state: installed
   with_items: "{{ base_packages }}"
-  tags: 
+  tags:
     - base
