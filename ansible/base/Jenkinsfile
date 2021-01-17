@@ -1,5 +1,6 @@
 node {
     stage("Processing ansible-lint test") {
+        sh "ls -a"
         sh "ansible-lint -p ./ansible/base"
     }
 }
