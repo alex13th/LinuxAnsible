@@ -7,7 +7,7 @@
     - "{{ ansible_distribution }}.yml"
     - "{{ ansible_os_family }}.yml"
     - "{{ default }}.yml"
-  tags: 
+  tags:
     - base
 
 - name: Set hostname
@@ -19,33 +19,37 @@
 
 - name: Backup repository files
   block:
-    - file:
+    - name: Making a repository backup directory
+      file:
         path: "{{ base_repository_dir }}/ansible_backup"
         state: directory
 
-    - find:
+    - name: Finding existing repository files
+      find:
         paths: "{{ base_repository_dir }}/"
         patterns: "*.repo"
       register: files_to_move
 
-    - copy:
+    - name: Backuping repository files
+      copy:
         src: "{{ item.path }}"
         dest: "{{ base_repository_dir }}/ansible_backup/"
         remote_src: yes
       with_items: "{{ files_to_move.files }}"
-      loop_control: 
+      loop_control:
         label: "Backup repo-file: {{ item.path }}"
 
-    - file:
+    - name: Removing repository files
+      file:
         path: "{{ item.path }}"
         state: absent
       with_items: "{{ files_to_move.files }}"
-      loop_control: 
+      loop_control:
         label: "Remove repo-file: {{ item.path }}"
   when:
     - base_use_local_repositories
     - base_use_only_local_repositories
-  tags: 
+  tags:
     - base
     - repository
 
