@@ -1,6 +1,8 @@
 node {
-    stage("Processing ansible-lint test") {
-        sh "ls -a"
+    stage("Getting repository") {
+        checkout scm
+    }
+    stage("Ansible-lint") {
         sh "ansible-lint -p ./ansible/base"
     }
 }
