@@ -1,7 +1,8 @@
 ---
 # tasks file for dhcpd
 
-- include_vars: "{{ item }}"
+- name: OS specific initializing
+  include_vars: "{{ item }}"
   with_first_found:
     - "{{ ansible_distribution }}.yml"
     - "{{ ansible_os_family }}.yml"
@@ -10,6 +11,7 @@
 
 - name: Install packages
   package:
+    name: Package
     pkg: "{{ item }}"
     state: "{{ dhcp_packages_state }}"
   with_items: "{{ dhcp_packages }}"
@@ -33,7 +35,7 @@
     owner: root
     group: root
     mode: 0644
-    validate: 'dhcpd -t -cf %s'
+    validate: "dhcpd -t -cf %s"
   notify: restart dhcp
   tags: dhcp
 
